@@ -7,6 +7,10 @@ from IO import Logger
 logger = Logger()
 
 
+def send_heartbeat() -> None:
+    print("heartbeat")
+
+
 def get_item() -> str:
     logger.info("Sending \"NONE\"")
     return "NONE"
@@ -19,6 +23,11 @@ def get_upgrade() -> str:
 
 def get_move_decision(game_state) -> str:
     player_num = game_state['playerNum']
+
+    try:
+        logger.info(f"{game_state['feedback']=}")
+    except KeyError as e:
+        logger.info(f"no feedback in this game state: keys={game_state.keys()}")
 
     pos = game_state[f"p{player_num}"]["position"]
     logger.info(f"Currently at ({pos['x']},{pos['y']})")
@@ -38,6 +47,12 @@ def get_move_decision(game_state) -> str:
 
 def get_action_decision(game_state) -> str:
     player_num = game_state['playerNum']
+
+    try:
+        logger.info(f"{game_state['feedback']=}")
+    except KeyError as e:
+        logger.info(f"no feedback in this game state: keys={game_state.keys()}")
+
     logger.info(f"I am player {player_num}")
 
     pos = game_state[f"p{player_num}"]["position"]
@@ -66,13 +81,9 @@ def get_action_decision(game_state) -> str:
     return action
 
 
-def crash_on_turn(curr_turn: int, turn: int) -> None:
-    if curr_turn == turn:
-        a = [1, 2, 3]
-        b = a[4]
-
 
 if __name__ == "__main__":
+    send_heartbeat()
     send_item(get_item())
     send_upgrade(get_upgrade())
 
@@ -94,8 +105,6 @@ if __name__ == "__main__":
         send_decision(move_decision)
         duration = time.perf_counter_ns() - start_time
         logger.info(f"Send move decision took {duration // 1e6} ms")
-
-        crash_on_turn(game_state['turn'], int(sys.argv[1]))
 
         start_time = time.perf_counter_ns()
         game_state = receive_gamestate()
