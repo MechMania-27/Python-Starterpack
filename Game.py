@@ -10,11 +10,14 @@ class Game:
         self.send_upgrade(str(upgrade))
         
 
-    def update_game(self, item):
+    def update_game(self):
         self.game_state = IO.receive_gamestate()
         
 
-    def send_decision(self, decision: str) -> None:
+    def send_move_decision(self, decision: str) -> None:
+        IO.send_string(decision)
+
+    def send_action_decision(self, decision: str) -> None:
         IO.send_string(decision)
 
 
