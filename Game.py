@@ -1,22 +1,49 @@
+import json
+import IO
+import api.Config
+
+
 class Game:
-    def __init__(self, game_state):
-        self.game_state = game_state
 
-    def get_player_num(self) -> str:
-        return self.game_state['playerNum']
+    def __init__(self, item, upgrade):
+        self.send_item(str(item))
+        self.send_upgrade(str(upgrade))
+        
 
-    def get_player_pos(self, player_num) -> tuple(int, int):
-        pos = self.game_state[f"p{player_num}"]["position"]
-        return pos['x'], pos['y']
+    def update_game(self, item):
+        self.game_state = IO.receive_gamestate()
+        
 
-    def get_board_size(self) -> tuple(int, int):
-        return self.game_state["tileMap"]["mapWidth"], self.game_state["tileMap"]["mapHeight"]
+    def send_decision(self, decision: str) -> None:
+        IO.send_string(decision)
 
-    def get_tile(self, x, y) -> dict:
-        return self.game_state["tileMap"]["tiles"][f"{y}"][f"{x}"]
 
-    def get_tile_crops(self, x, y) -> dict:
-        return self.game_state["tileMap"]["tiles"][f"{y}"][f"{x}"]["crops"]
+    def send_item(self, item: str) -> None:
+        IO.send_string(item)
+
+
+    def send_upgrade(self, upgrade: str) -> None:
+        IO.send_string(upgrade)
+
+
+
+        
+
+    # def get_player_num(self) -> str:
+    #     return self.game_state['playerNum']
+
+    # def get_player_pos(self, player_num) -> tuple(int, int):
+    #     pos = self.game_state[f"p{player_num}"]["position"]
+    #     return pos['x'], pos['y']
+
+    # def get_board_size(self) -> tuple(int, int):
+    #     return self.game_state["tileMap"]["mapWidth"], self.game_state["tileMap"]["mapHeight"]
+
+    # def get_tile(self, x, y) -> dict:
+    #     return self.game_state["tileMap"]["tiles"][f"{y}"][f"{x}"]
+
+    # def get_tile_crops(self, x, y) -> dict:
+    #     return self.game_state["tileMap"]["tiles"][f"{y}"][f"{x}"]["crops"]
 
     # api functions
     def possible_positions(self):

@@ -7,16 +7,11 @@ def receive_gamestate():
     return json.loads(gamestate_bytes)
 
 
-def send_decision(decision: str) -> None:
-    print(decision)
+def readline() -> str:
+    return sys.stdin.readline()
 
-
-def send_item(item: str) -> None:
-    print(item)
-
-
-def send_upgrade(upgrade: str) -> None:
-    print(upgrade)
+def send_string(str : str):
+    print(str)
 
 
 class Logger:
