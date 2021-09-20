@@ -1,4 +1,5 @@
 import json
+from model.GameState import game_state
 import IO
 import api.Config
 
@@ -11,7 +12,12 @@ class Game:
         
 
     def update_game(self):
+        logger = IO.Logger()
         self.game_state = IO.receive_gamestate()
+        print(type(game_state))
+        if (isinstance(game_state, game_state)) :
+            logger.debug(f"contents of gs: {game_state.turn}")
+        
         
 
     def send_move_decision(self, decision: str) -> None:

@@ -1,10 +1,15 @@
+from model.GameState import game_state
+from types import SimpleNamespace as Namespace
 import sys
 import json
 
 
+
+
 def receive_gamestate():
     gamestate_bytes = sys.stdin.readline()
-    return json.loads(gamestate_bytes)
+    a = json.loads(gamestate_bytes, object_hook=lambda d: Namespace(**d))
+    return a
 
 
 def readline() -> str:
