@@ -1,9 +1,12 @@
-class position:
-
-    def __init__(self, x, y) -> None:
-        self.x = x
-        self.y = y
-
+class Position:
+    def __init__(self, x = -1, y = -1, **kwargs) -> None:
+        if x != -1 and y != -1:
+            self.x = x
+            self.y = y
+        elif kwargs:
+            self.x = kwargs.get('pos_dict')['x']
+            self.y = kwargs.get('pos_dict')['y']
+    
     def getpos(self, x, y):
         return x, y
 
@@ -13,7 +16,6 @@ class position:
         if type(object) != type(self):
             return False
         return (self.x, self.y) == object.getpos()
-        
 
     def __str__(self) -> str:
         return f"{self.x} {self.y}"

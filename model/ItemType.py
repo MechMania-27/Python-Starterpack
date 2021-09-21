@@ -1,6 +1,5 @@
-class item_type:
-    def __init__(self) -> None:
-        pass
+class ItemType:
+    def __init__(self, type) -> None:
+        self.type = type
     def __str__(self) -> str:
-        pass
-    # todo: itemtype.tostring
+        return type

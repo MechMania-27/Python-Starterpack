@@ -1,23 +1,30 @@
 import json
-from model.GameState import game_state
+from model.GameState import GameState
 import IO
-import api.Config
-
+import configparser
 
 class Game:
 
     def __init__(self, item, upgrade):
         self.send_item(str(item))
         self.send_upgrade(str(upgrade))
+        with open(r'E:\uiuc\Mechmania\Python-Starterpack\resources\mm27.properties') as f:
+            file_content = '[dummy_section]\n' + f.read()
+        config_parser = configparser.RawConfigParser()
+        config_parser.read_string(file_content)
+        config = config_parser['dummy_section']
+
+
         
 
     def update_game(self):
-        logger = IO.Logger()
         self.game_state = IO.receive_gamestate()
-        print(type(game_state))
-        if (isinstance(game_state, game_state)) :
-            logger.debug(f"contents of gs: {game_state.turn}")
-        
+        logger = IO.Logger()
+        # logger.debug(str(self.game_state.__dict__))
+        # logger.debug(str(self.game_state.))
+        # logger.debug(str(self.game_state.p1.position.x))
+
+                
         
 
     def send_move_decision(self, decision: str) -> None:
@@ -33,30 +40,3 @@ class Game:
 
     def send_upgrade(self, upgrade: str) -> None:
         IO.send_string(upgrade)
-
-
-
-        
-
-    # def get_player_num(self) -> str:
-    #     return self.game_state['playerNum']
-
-    # def get_player_pos(self, player_num) -> tuple(int, int):
-    #     pos = self.game_state[f"p{player_num}"]["position"]
-    #     return pos['x'], pos['y']
-
-    # def get_board_size(self) -> tuple(int, int):
-    #     return self.game_state["tileMap"]["mapWidth"], self.game_state["tileMap"]["mapHeight"]
-
-    # def get_tile(self, x, y) -> dict:
-    #     return self.game_state["tileMap"]["tiles"][f"{y}"][f"{x}"]
-
-    # def get_tile_crops(self, x, y) -> dict:
-    #     return self.game_state["tileMap"]["tiles"][f"{y}"][f"{x}"]["crops"]
-
-    # api functions
-    def possible_positions(self):
-        pass
-
-    def get_tile_type_after_z_turns(self, x, y, z):
-        pass

@@ -1,34 +1,35 @@
+from os import add_dll_directory
 import sys
 import random
 import time
+import configparser
 from IO import receive_gamestate
 from IO import Logger
+from IO import send_heartbeat
 from Game import Game
-import model.Position
-from model.decisions.MoveDecision import move_decision
-from model.decisions.ActionDecision import action_decision
+from model.Position import Position
+from model.decisions.MoveDecision import MoveDecision
+from model.decisions.ActionDecision import ActionDecision
 
 logger = Logger()
 
 
 
 def get_move_decision(game):
-    return move_decision(model.Position.position(0, 1))
+    return MoveDecision(Position(0, 0))
 
 def get_action_decision(game):
-    return action_decision()
+    return ActionDecision()
 
 
 
-# def crash_on_turn(curr_turn: int, turn: int) -> None:
-#     if curr_turn == turn:
-#         a = [1, 2, 3]
-#         b = a[4]
 
 
 if __name__ == "__main__":
-    print("heartbeat")
+    send_heartbeat()
     game = Game("NONE", "NONE")
+
+
     
     while (True) :
         try :

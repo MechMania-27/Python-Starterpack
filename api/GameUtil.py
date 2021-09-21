@@ -1,6 +1,8 @@
 class game_util():
-    def get_player_from_name(state, name):
+    @staticmethod
+    def get_player_from_name(gamestate, name):
         pass
+    @staticmethod
     def within_range(state, name):
         # get max movement from player
         pass

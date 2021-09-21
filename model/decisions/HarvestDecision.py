@@ -1,6 +1,6 @@
 from Position import position
-import ActionDecision
-class harvest_decision(ActionDecision.action_decision):
+from ActionDecision import ActionDecision
+class harvest_decision(ActionDecision):
     def __init__(self, pos: position) -> None:
         self.position = position
     

@@ -1,6 +1,6 @@
-from model.Position import position
-class move_decision:
-    def __init__(self, pos: position) -> None:
+from model.Position import Position
+class MoveDecision:
+    def __init__(self, pos: Position) -> None:
         self.pos = pos
 
     def __str__(self) -> str:

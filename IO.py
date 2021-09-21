@@ -1,14 +1,19 @@
-from model.GameState import game_state
+from model.GameState import GameState
 from types import SimpleNamespace as Namespace
 import sys
 import json
 
 
 
+# def oh(d):
+#     Logger().debug("**entris:" + str(**d))
+#     return GameState(**d)
 
 def receive_gamestate():
     gamestate_bytes = sys.stdin.readline()
-    a = json.loads(gamestate_bytes, object_hook=lambda d: Namespace(**d))
+    gamestate_dict = json.loads(gamestate_bytes)
+    a = GameState(gamestate_dict)
+    Logger().debug(str((a.tile_map.tiles[10][10].type)))
     return a
 
 
@@ -18,7 +23,8 @@ def readline() -> str:
 def send_string(str : str):
     print(str)
 
-
+def send_heartbeat():
+    print("heartbeat")
 class Logger:
     def __init__(self) -> None:
         pass

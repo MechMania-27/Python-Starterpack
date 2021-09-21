@@ -1,5 +1,5 @@
-import ActionDecision
-class plant_decision(ActionDecision.action_decision):
+from ActionDecision import ActionDecision
+class plant_decision(ActionDecision):
     def __init__(self, crop_types: list, coords: list) -> None:
         self.crop_types = crop_types
         self.coords = coords

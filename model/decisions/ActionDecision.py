@@ -1,4 +1,4 @@
-class action_decision:
+class ActionDecision:
     def __init__(self) -> None:
         pass
     
