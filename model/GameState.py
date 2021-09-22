@@ -9,3 +9,5 @@ class GameState:
         self.player1 = Player(gamestate_dict['p1'])
         self.player2 = Player(gamestate_dict['p2'])
         self.tile_map = TileMap(gamestate_dict['tileMap'])
+        self.player_num = gamestate_dict['playerNum']
+        self.feedback = gamestate_dict['feedback']
