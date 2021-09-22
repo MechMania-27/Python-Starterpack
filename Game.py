@@ -2,41 +2,41 @@ import json
 from model.GameState import GameState
 import IO
 import configparser
+from model.ItemType import ItemType
+from model.UpgradeType import UpgradeType
+from model.decisions.MoveDecision import MoveDecision
+from model.decisions.ActionDecision import ActionDecision
+import os
+from pathlib import Path
+
 
 class Game:
+    logger = IO.Logger()
 
-    def __init__(self, item, upgrade):
-        self.send_item(str(item))
-        self.send_upgrade(str(upgrade))
-        with open(r'E:\uiuc\Mechmania\Python-Starterpack\resources\mm27.properties') as f:
+    def __init__(self, item: ItemType, upgrade: UpgradeType):
+        IO.send_heartbeat()
+        self.send_item(item)
+        self.send_upgrade(upgrade)
+        with open(Path(os.path.dirname(__file__)) / "mm27.properties") as f:
             file_content = '[dummy_section]\n' + f.read()
         config_parser = configparser.RawConfigParser()
         config_parser.read_string(file_content)
         config = config_parser['dummy_section']
 
-
-        
-
-    def update_game(self):
+    def update_game(self) -> None:
         self.game_state = IO.receive_gamestate()
-        logger = IO.Logger()
-        # logger.debug(str(self.game_state.__dict__))
-        # logger.debug(str(self.game_state.))
-        # logger.debug(str(self.game_state.p1.position.x))
 
-                
-        
+    def get_game_state(self) -> GameState:
+        return self.game_state
 
-    def send_move_decision(self, decision: str) -> None:
-        IO.send_string(decision)
+    def send_move_decision(self, decision: MoveDecision) -> None:
+        IO.send_string(decision.engine_str())
 
-    def send_action_decision(self, decision: str) -> None:
-        IO.send_string(decision)
+    def send_action_decision(self, decision: ActionDecision) -> None:
+        IO.send_string(decision.engine_str())
 
+    def send_item(self, item: ItemType) -> None:
+        IO.send_string(item.engine_str())
 
-    def send_item(self, item: str) -> None:
-        IO.send_string(item)
-
-
-    def send_upgrade(self, upgrade: str) -> None:
-        IO.send_string(upgrade)
+    def send_upgrade(self, upgrade: UpgradeType) -> None:
+        IO.send_string(upgrade.engine_str())

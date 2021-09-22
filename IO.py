@@ -5,26 +5,22 @@ import json
 
 
 
-# def oh(d):
-#     Logger().debug("**entris:" + str(**d))
-#     return GameState(**d)
-
 def receive_gamestate():
     gamestate_bytes = sys.stdin.readline()
     gamestate_dict = json.loads(gamestate_bytes)
     a = GameState(gamestate_dict)
-    Logger().debug(str((a.tile_map.tiles[10][10].type)))
     return a
-
 
 def readline() -> str:
     return sys.stdin.readline()
 
-def send_string(str : str):
-    print(str)
+def send_string(s: str):
+    print(s)
 
 def send_heartbeat():
     print("heartbeat")
+
+
 class Logger:
     def __init__(self) -> None:
         pass

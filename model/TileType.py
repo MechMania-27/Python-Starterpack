@@ -1,5 +1,13 @@
+from enum import Enum
+
 class TileType:
-    def __init__(self, type) -> None:
-        self.type = type
+    GREEN_GROCER = 1
+    GRASS = 2
+    ARID = 3
+    SOIL = 4
+    F_BAND_OUTER = 5
+    F_BAND_MID = 6
+    F_BAND_INNER = 7
+
     def __str__(self) -> str:
-        return type
+        return f"{self.name}"

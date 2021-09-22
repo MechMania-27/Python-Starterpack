@@ -1,12 +1,14 @@
 from ActionDecision import ActionDecision
-class buy_action(ActionDecision):
+
+
+class BuyDecision(ActionDecision):
 
     def __init__(self, crop_types: list, quantities: list) -> None:
         assert(len(crop_types) == len(quantities))
         self.crop_types = crop_types
         self.quantities = quantities
 
-    def __str__(self) -> str:
+    def engine_str(self) -> str:
         res = f"buy "
         for i in range(len(self.crop_types)):
             res += self.crop_types[i]
@@ -15,3 +17,6 @@ class buy_action(ActionDecision):
             res += " "
         res = res[:-1]
         return res
+
+    def __str__(self) -> str:
+        return f"BuyDecision"
