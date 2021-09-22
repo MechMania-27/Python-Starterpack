@@ -25,8 +25,8 @@ class Logger:
     def __init__(self) -> None:
         pass
 
-    def info(self, message: str) -> None:
-        print(f"info: {message}", file=sys.stderr, flush=True)
+    def info(self, message) -> None:
+        print(f"info: {str(message)}", file=sys.stderr, flush=True)
 
     def debug(self, message: str) -> None:
-        print(f"debug: {message}", file=sys.stderr, flush=True)
+        print(f"debug: {str(message)}", file=sys.stderr, flush=True)
