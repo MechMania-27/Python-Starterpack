@@ -1,6 +1,6 @@
 from enum import Enum
 
-class TileType:
+class TileType(Enum):
     GREEN_GROCER = 1
     GRASS = 2
     ARID = 3

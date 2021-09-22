@@ -5,7 +5,9 @@ class Player:
         self.upgrade = player_dict['upgrade']
         self.money = player_dict['money']
         self.seed_inventory = player_dict['seedInventory']
+        
         self.harvested_inventory = player_dict['harvestedInventory']
+
         self.discount = player_dict['discount']
         self.protection_radius = player_dict['protectionRadius']
         self.harvest_radius = player_dict['harvestRadius']

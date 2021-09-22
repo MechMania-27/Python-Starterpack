@@ -11,6 +11,7 @@ from model.decisions.MoveDecision import MoveDecision
 from model.decisions.ActionDecision import ActionDecision
 from model.ItemType import ItemType
 from model.UpgradeType import UpgradeType
+from model.GameState import GameState
 import api.Constants
 
 logger = Logger()

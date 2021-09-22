@@ -1,13 +1,11 @@
+from api.Constants import Constants
 import json
 from model.GameState import GameState
 import IO
-import configparser
 from model.ItemType import ItemType
 from model.UpgradeType import UpgradeType
 from model.decisions.MoveDecision import MoveDecision
 from model.decisions.ActionDecision import ActionDecision
-import os
-from pathlib import Path
 
 
 class Game:
@@ -17,11 +15,8 @@ class Game:
         IO.send_heartbeat()
         self.send_item(item)
         self.send_upgrade(upgrade)
-        with open(Path(os.path.dirname(__file__)) / "mm27.properties") as f:
-            file_content = '[dummy_section]\n' + f.read()
-        config_parser = configparser.RawConfigParser()
-        config_parser.read_string(file_content)
-        config = config_parser['dummy_section']
+ 
+        self.constants = Constants()
 
     def update_game(self) -> None:
         self.game_state = IO.receive_gamestate()
