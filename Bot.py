@@ -3,15 +3,18 @@ from Game import Game
 from model.Position import Position
 from model.decisions.MoveDecision import MoveDecision
 from model.decisions.ActionDecision import ActionDecision
-from model.decisions.DoNothingDecision import DoNothingDecision
-from model.decisions.BuyDecision import MoveDecision
+from model.decisions.BuyDecision import BuyDecision
 from model.decisions.HarvestDecision import HarvestDecision
 from model.decisions.PlantDecision import PlantDecision
+from model.decisions.UseItemDecision import UseItemDecision
+from model.decisions.DoNothingDecision import DoNothingDecision
 from model.ItemType import ItemType
 from model.UpgradeType import UpgradeType
 from model.GameState import GameState
+from api.Constants import Constants
 
 logger = Logger()
+constants = Constants()
 
 
 def get_move_decision(game: Game) -> MoveDecision:
@@ -31,6 +34,7 @@ def get_move_decision(game: Game) -> MoveDecision:
     game_state: GameState = game.get_game_state()
     logger.debug(f"[Turn {game_state.turn}] Feedback received from engine: {game_state.feedback}")
 
+    # Select your decision here!
     decision = MoveDecision(Position(0, 0))
     logger.debug(f"[Turn {game_state.turn}] Sending MoveDecision: {decision}")
     return decision
@@ -52,6 +56,7 @@ def get_action_decision(game: Game) -> ActionDecision:
     game_state: GameState = game.get_game_state()
     logger.debug(f"[Turn {game_state.turn}] Feedback received from engine: {game_state.feedback}")
 
+    # Select your decision here!
     decision = DoNothingDecision()
     logger.debug(f"[Turn {game_state.turn}] Sending ActionDecision: {decision}")
     return decision

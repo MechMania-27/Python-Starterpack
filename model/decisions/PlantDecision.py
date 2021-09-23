@@ -8,7 +8,15 @@ class PlantDecision(ActionDecision):
         assert(len(crop_types) == len(coords))
 
     def __str__(self) -> str:
-        return "PlantDecision"
+        res = f"PlantDecision("
+        for i in range(len(self.crop_types)):
+            res += self.crop_types[i]
+            res += ":"
+            res += str(self.coords[i])
+            res += ","
+        res = res[:-1]
+        res += ")"
+        return res
 
     def engine_str(self) -> str:
         res = f"plant "

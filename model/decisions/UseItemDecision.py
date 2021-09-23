@@ -6,7 +6,7 @@ class UseItemDecision(ActionDecision):
         self.pos = pos
 
     def __str__(self) -> str:
-        return "UseItemDecision"
+        return "UseItemDecision()"
 
     def engine_str(self) -> str:
         return f"use_item"

@@ -19,4 +19,12 @@ class BuyDecision(ActionDecision):
         return res
 
     def __str__(self) -> str:
-        return f"BuyDecision"
+        res = "BuyDecision("
+        for i in range(len(self.crop_types)):
+            res += self.crop_types[i]
+            res += ":"
+            res += str(self.quantities[i])
+            res += ","
+        res = res[:-1]
+        res += ")"
+        return res

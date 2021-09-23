@@ -12,4 +12,4 @@ class DoNothingDecision(ActionDecision):
         return "do_nothing "
 
     def __str__(self) -> str:
-        return f"DoNothingDecision"
+        return f"DoNothingDecision()"

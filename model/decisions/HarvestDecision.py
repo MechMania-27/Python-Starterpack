@@ -6,7 +6,7 @@ class HarvestDecision(ActionDecision):
         self.position = pos
     
     def __str__(self) -> str:
-        return "HarvestDecision"
+        return f"HarvestDecision({str(self.position)})"
 
     def engine_str(self) -> str:
         return f"harvest {str(self.position)}"

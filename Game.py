@@ -1,4 +1,3 @@
-from api.Constants import Constants
 from model.GameState import GameState
 import IO
 from model.ItemType import ItemType
@@ -8,14 +7,11 @@ from model.decisions.ActionDecision import ActionDecision
 
 
 class Game:
-    logger = IO.Logger()
 
     def __init__(self, item: ItemType, upgrade: UpgradeType):
         IO.send_heartbeat()
         self.send_item(item)
         self.send_upgrade(upgrade)
- 
-        self.constants = Constants()
 
     def update_game(self) -> None:
         self.game_state = IO.receive_gamestate()
