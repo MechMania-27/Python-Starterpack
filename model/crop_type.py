@@ -29,3 +29,13 @@ class CropType(Enum):
 
     def get_seed_price(self) -> float:
         return float(self.config[f"croptype.{self.name.lower()}.seedprice"])
+
+    def get_growth_time(self) -> float:
+        return float(self.config[f"croptype.{self.name.lower()}.growthtime"])
+
+    def get_fertility_sensitivity(self) -> float:
+        return float(self.config[f"croptype.{self.name.lower()}.fertilitysens"])
+
+    def get_growth_value(self) -> float:
+        return float(self.config[f"croptype.{self.name.lower()}.growthvalue"])
+
