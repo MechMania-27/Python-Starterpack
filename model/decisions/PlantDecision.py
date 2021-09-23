@@ -10,7 +10,7 @@ class PlantDecision(ActionDecision):
     def __str__(self) -> str:
         res = f"PlantDecision("
         for i in range(len(self.crop_types)):
-            res += self.crop_types[i]
+            res += str(self.crop_types[i])
             res += ":"
             res += str(self.coords[i])
             res += ","
@@ -21,9 +21,9 @@ class PlantDecision(ActionDecision):
     def engine_str(self) -> str:
         res = f"plant "
         for i in range(len(self.crop_types)):
-            res += self.crop_types[i]
+            res += str(self.crop_types[i])
             res += " "
-            res += str(self.coords[i])
+            res += self.coords[i].engine_str()
             res += " "
         res = res[:-1]
         return res

@@ -11,4 +11,5 @@ class TileMap:
                 tile_row.append(Tile(tile))
             self.tiles.append(tile_row)
         
-        
+    def get_tile(self, x: int, y: int) -> Tile:
+        return self.tiles[y][x]

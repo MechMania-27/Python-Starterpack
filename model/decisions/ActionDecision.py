@@ -1,6 +1,6 @@
 from abc import ABCMeta, abstractmethod
 
-class ActionDecision(ABCMeta):
+class ActionDecision(metaclass=ABCMeta):
     def __init__(self) -> None:
         pass
     

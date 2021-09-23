@@ -11,20 +11,22 @@ class BuyDecision(ActionDecision):
     def engine_str(self) -> str:
         res = f"buy "
         for i in range(len(self.crop_types)):
-            res += self.crop_types[i]
+            res += str(self.crop_types[i])
             res += " "
             res += str(self.quantities[i])
             res += " "
-        res = res[:-1]
+        if len(self.crop_types) > 0:
+            res = res[:-1]
         return res
 
     def __str__(self) -> str:
         res = "BuyDecision("
         for i in range(len(self.crop_types)):
-            res += self.crop_types[i]
+            res += str(self.crop_types[i])
             res += ":"
             res += str(self.quantities[i])
             res += ","
-        res = res[:-1]
+        if len(self.crop_types) > 0:
+            res = res[:-1]
         res += ")"
         return res

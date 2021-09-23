@@ -11,3 +11,15 @@ class GameState:
         self.tile_map = TileMap(gamestate_dict['tileMap'])
         self.player_num = gamestate_dict['playerNum']
         self.feedback = gamestate_dict['feedback']
+
+    def get_my_player(self) -> Player:
+        if self.player_num == 1:
+            return self.player1
+        else:
+            return self.player2
+
+    def get_opponent_player(self) -> Player:
+        if self.player_num == 1:
+            return self.player2
+        else:
+            return self.player1
