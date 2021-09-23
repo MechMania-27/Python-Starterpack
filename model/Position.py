@@ -18,4 +18,7 @@ class Position:
         return (self.x, self.y) == object.getpos()
 
     def __str__(self) -> str:
+        return f"({self.x},{self.y})"
+
+    def engine_str(self) -> str:
         return f"{self.x} {self.y}"

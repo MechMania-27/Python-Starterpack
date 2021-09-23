@@ -1,12 +1,25 @@
 from model.Position import Position
 from model.decisions.ActionDecision import ActionDecision
+from typing import List
+
 
 class HarvestDecision(ActionDecision):
-    def __init__(self, pos: Position) -> None:
-        self.position = pos
+    def __init__(self, positions: List[Position]) -> None:
+        self.positions = positions
     
     def __str__(self) -> str:
-        return f"HarvestDecision({str(self.position)})"
+        res = "HarvestDecision("
+        for i in range(len(self.positions)):
+            res += f"({self.positions[i].x},{self.positions[i].y})"
+            res += ","
+        res = res[:-1]
+        res += ")"
+        return res
 
     def engine_str(self) -> str:
-        return f"harvest {str(self.position)}"
+        res = "harvest "
+        for i in range(len(self.positions)):
+            res += self.positions[i].engine_str()
+            res += " "
+        res = res[:-1]
+        return res

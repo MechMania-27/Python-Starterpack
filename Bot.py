@@ -8,10 +8,14 @@ from model.decisions.HarvestDecision import HarvestDecision
 from model.decisions.PlantDecision import PlantDecision
 from model.decisions.UseItemDecision import UseItemDecision
 from model.decisions.DoNothingDecision import DoNothingDecision
+from model.TileType import TileType
 from model.ItemType import ItemType
+from model.CropType import CropType
 from model.UpgradeType import UpgradeType
 from model.GameState import GameState
 from api.Constants import Constants
+
+import random
 
 logger = Logger()
 constants = Constants()
@@ -35,7 +39,19 @@ def get_move_decision(game: Game) -> MoveDecision:
     logger.debug(f"[Turn {game_state.turn}] Feedback received from engine: {game_state.feedback}")
 
     # Select your decision here!
-    decision = MoveDecision(Position(0, 0))
+    my_player: Player = game_state.get_my_player()
+    pos: Position = my_player.position
+    logger.info(f"Currently at {my_player.position}")
+
+    if random.random() < 0.5 and \
+            (sum(my_player.seed_inventory.values()) == 0 or
+             len(my_player.harvested_inventory)):
+        decision = MoveDecision(Position(constants.BOARD_WIDTH // 2, max(0, pos.y - constants.MAX_MOVEMENT)))
+    else:
+        x = min(max(0, random.randint(pos.x - 7, pos.x + 7)), constants.BOARD_WIDTH - 1)
+        y = min(max(0, random.randint(pos.y - 7, pos.y + 7)), constants.BOARD_HEIGHT - 1)
+        decision = MoveDecision(Position(x, y))
+
     logger.debug(f"[Turn {game_state.turn}] Sending MoveDecision: {decision}")
     return decision
 
@@ -57,7 +73,24 @@ def get_action_decision(game: Game) -> ActionDecision:
     logger.debug(f"[Turn {game_state.turn}] Feedback received from engine: {game_state.feedback}")
 
     # Select your decision here!
-    decision = DoNothingDecision()
+    my_player: Player = game_state.get_my_player()
+    pos: Position = my_player.position
+    crop = random.choice(list(CropType))
+    if my_player.seed_inventory[crop] > 0 and \
+        game_state.tile_map.get_tile(pos.x, pos.y).type != TileType.GREEN_GROCER and \
+        game_state.tile_map.get_tile(pos.x, pos.y).type >= TileType.F_BAND_OUTER:
+        decision = PlantDecision([crop], [pos])
+    elif my_player.money >= crop.get_seed_price() and \
+        game_state.tile_map.get_tile(pos.x, pos.y).type != TileType.GREEN_GROCER:
+        decision = BuyDecision([crop], [1])
+    else:
+        harvest_radius = 1
+        locations = []
+        for x in range(max(0, pos.x - 1), min(pos.x + 1, constants.BOARD_HEIGHT - 1)):
+            for y in range(max(0, pos.y - 1), min(pos.y + 1, constants.BOARD_WIDTH - 1)):
+                if abs(x - pos.x) + abs(y - pos.y) <= harvest_radius:
+                    locations.append(Position(x, y))
+        decision = HarvestDecision(locations)
     logger.debug(f"[Turn {game_state.turn}] Sending ActionDecision: {decision}")
     return decision
 
@@ -79,7 +112,7 @@ def main():
             game.update_game()
         except IOError:
             exit(-1)
-        game.send_action_decision(get_move_decision(game))
+        game.send_action_decision(get_action_decision(game))
 
 
 if __name__ == "__main__":

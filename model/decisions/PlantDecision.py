@@ -23,7 +23,7 @@ class PlantDecision(ActionDecision):
         for i in range(len(self.crop_types)):
             res += self.crop_types[i]
             res += " "
-            res += str(self.coords[i])
+            res += self.coords[i].engine_str()
             res += " "
         res = res[:-1]
         return res

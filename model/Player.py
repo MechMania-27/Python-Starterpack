@@ -1,4 +1,5 @@
 from model.Position import Position
+from model.CropType import CropType
 
 
 class Player:
@@ -6,7 +7,7 @@ class Player:
         self.position = Position(pos_dict=player_dict['position'])
         self.upgrade = player_dict['upgrade']
         self.money = player_dict['money']
-        self.seed_inventory = player_dict['seedInventory']
+        self.seed_inventory = {CropType[k]:v for k,v in player_dict['seedInventory'].items()}
         
         self.harvested_inventory = player_dict['harvestedInventory']
 
