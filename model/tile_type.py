@@ -11,3 +11,6 @@ class TileType(Enum):
 
     def __str__(self) -> str:
         return f"{self.name}"
+
+    def get_fertility(self) -> float:
+        return float(self.config[f"tiletype.{self.name.lower()}.fertility"])
