@@ -1,8 +1,8 @@
-from model.Position import Position
-from model.CropType import CropType
-from model.ItemType import ItemType
-from model.UpgradeType import UpgradeType
-from api.Constants import Constants
+from model.position import Position
+from model.crop_type import CropType
+from model.item_type import ItemType
+from model.upgrade_type import UpgradeType
+from api.constants import Constants
 
 
 class Player:

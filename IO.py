@@ -1,4 +1,4 @@
-from model.GameState import GameState
+from model.game_state import GameState
 import sys
 import json
 

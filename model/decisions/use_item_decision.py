@@ -1,5 +1,5 @@
-from model.decisions.ActionDecision import ActionDecision
-from model.Position import Position
+from model.decisions.action_decision import ActionDecision
+from model.position import Position
 
 class UseItemDecision(ActionDecision):
     def __init__(self, pos: Position) -> None:

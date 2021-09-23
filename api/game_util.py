@@ -1,9 +1,9 @@
 from typing import List
-from model.TileType import TileType
-from model.GameState import GameState
-from model.Player import Player
-from model.Position import Position
-from api.Constants import Constants
+from model.tile_type import TileType
+from model.game_state import GameState
+from model.player import Player
+from model.position import Position
+from api.constants import Constants
 
 import sys
 

@@ -1,4 +1,4 @@
-from model.decisions.ActionDecision import ActionDecision
+from model.decisions.action_decision import ActionDecision
 
 
 class PlantDecision(ActionDecision):
