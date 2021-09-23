@@ -1,4 +1,3 @@
-from os import terminal_size
 from model.Tile import Tile
 
 class TileMap:

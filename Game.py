@@ -1,9 +1,8 @@
 from api.Constants import Constants
-import json
 from model.GameState import GameState
 import IO
 from model.ItemType import ItemType
-from model.UpgradeType import UpgradeType
+from model import UpgradeType
 from model.decisions.MoveDecision import MoveDecision
 from model.decisions.ActionDecision import ActionDecision
 

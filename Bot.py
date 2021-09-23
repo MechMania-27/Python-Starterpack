@@ -1,18 +1,15 @@
-import sys
-import random
-import time
-import configparser
-from IO import receive_gamestate
 from IO import Logger
-from IO import send_heartbeat
 from Game import Game
 from model.Position import Position
 from model.decisions.MoveDecision import MoveDecision
 from model.decisions.ActionDecision import ActionDecision
+from model.decisions.DoNothingDecision import DoNothingDecision
+from model.decisions.BuyDecision import MoveDecision
+from model.decisions.HarvestDecision import HarvestDecision
+from model.decisions.PlantDecision import PlantDecision
 from model.ItemType import ItemType
 from model.UpgradeType import UpgradeType
 from model.GameState import GameState
-import api.Constants
 
 logger = Logger()
 
@@ -28,11 +25,11 @@ def get_move_decision(game: Game) -> MoveDecision:
     After moving (and submitting the move decision), you will be given a new
     game state with both players in their updated positions.
 
-    @param game The object that contains the game state and other related information
-    @return MoveDecision A location for the bot to move to this turn
+    :param: game The object that contains the game state and other related information
+    :returns: MoveDecision A location for the bot to move to this turn
     """
     game_state: GameState = game.get_game_state()
-    logger.debug(f"[Turn {game_state.turn}] Feedback received from engine: [{game_state.feedback}]")
+    logger.debug(f"[Turn {game_state.turn}] Feedback received from engine: {game_state.feedback}")
 
     decision = MoveDecision(Position(0, 0))
     logger.debug(f"[Turn {game_state.turn}] Sending MoveDecision: {decision}")
@@ -49,11 +46,11 @@ def get_action_decision(game: Game) -> ActionDecision:
 
     After this action, the next turn will begin.
 
-    @param game The object that contains the game state and other related information
-    @return ActionDecision A decision for the bot to make this turn
+    :param: game The object that contains the game state and other related information
+    :returns: ActionDecision A decision for the bot to make this turn
     """
     game_state: GameState = game.get_game_state()
-    logger.debug(f"[Turn {game_state.turn}] Feedback received from engine: [{game_state.feedback}]")
+    logger.debug(f"[Turn {game_state.turn}] Feedback received from engine: {game_state.feedback}")
 
     decision = DoNothingDecision()
     logger.debug(f"[Turn {game_state.turn}] Sending ActionDecision: {decision}")
@@ -66,12 +63,17 @@ def main():
     """
     game = Game(ItemType.NONE, UpgradeType.NONE)
 
-    while (True) :
-        try :
+    while (True):
+        try:
             game.update_game()
         except IOError:
             exit(-1)
         game.send_move_decision(get_move_decision(game))
+
+        try:
+            game.update_game()
+        except IOError:
+            exit(-1)
         game.send_action_decision(get_move_decision(game))
 
 

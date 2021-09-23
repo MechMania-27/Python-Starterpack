@@ -1,4 +1,6 @@
 from model.Position import Position
+
+
 class Player:
     def __init__(self, player_dict) -> None:
         self.position = Position(pos_dict=player_dict['position'])

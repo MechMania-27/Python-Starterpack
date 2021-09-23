@@ -1,8 +1,6 @@
 from model.GameState import GameState
-from types import SimpleNamespace as Namespace
 import sys
 import json
-
 
 
 def receive_gamestate():

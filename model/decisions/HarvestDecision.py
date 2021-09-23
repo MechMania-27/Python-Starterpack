@@ -1,9 +1,9 @@
-from Position import position
-from ActionDecision import ActionDecision
+from model.Position import Position
+from model.decisions.ActionDecision import ActionDecision
 
 class HarvestDecision(ActionDecision):
-    def __init__(self, pos: position) -> None:
-        self.position = position
+    def __init__(self, pos: Position) -> None:
+        self.position = pos
     
     def __str__(self) -> str:
         return "HarvestDecision"

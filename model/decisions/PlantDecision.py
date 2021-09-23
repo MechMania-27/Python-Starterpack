@@ -1,4 +1,5 @@
-from ActionDecision import ActionDecision
+from model.decisions.ActionDecision import ActionDecision
+
 
 class PlantDecision(ActionDecision):
     def __init__(self, crop_types: list, coords: list) -> None:

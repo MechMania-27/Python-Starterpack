@@ -1,7 +1,7 @@
-from ActionDecision import ActionDecision
+from model.decisions.ActionDecision import ActionDecision
 
 
-class BuyDecision(ActionDecision):
+class DoNothingDecision(ActionDecision):
 
     def __init__(self, crop_types: list, quantities: list) -> None:
         assert(len(crop_types) == len(quantities))

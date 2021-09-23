@@ -1,5 +1,3 @@
-from posixpath import abspath, dirname
-from IO import Logger
 from pathlib import Path
 import configparser
 import os
@@ -7,7 +5,7 @@ import os
 
 class Constants:
     def __init__(self) -> None:
-        with open(Path(os.path.dirname(os.path.dirname(__file__))) / "resources\\mm27.properties") as f:
+        with open(Path(os.path.dirname(os.path.dirname(__file__))) / "resources" / "mm27.properties") as f:
             file_content = '[dummy_section]\n' + f.read()
         config_parser = configparser.RawConfigParser()
         config_parser.read_string(file_content)

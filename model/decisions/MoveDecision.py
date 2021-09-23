@@ -1,4 +1,6 @@
 from model.Position import Position
+
+
 class MoveDecision:
     def __init__(self, pos: Position) -> None:
         self.pos = pos
