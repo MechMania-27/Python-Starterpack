@@ -1,6 +1,6 @@
-from model.ItemType import ItemType
-from model.TileType import TileType
-from model.Crop import Crop
+from model.item_type import ItemType
+from model.tile_type import TileType
+from model.crop import Crop
 class Tile:
     def __init__(self, tile_dict) -> None:
         self.type = TileType[tile_dict['type']]

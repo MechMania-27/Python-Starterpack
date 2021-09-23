@@ -1,4 +1,4 @@
-from model.Position import Position
+from model.position import Position
 
 
 class MoveDecision:

@@ -1,14 +1,14 @@
-from model.GameState import GameState
+from model.game_state import GameState
 import IO
-from model.ItemType import ItemType
-from model import UpgradeType
-from model.decisions.MoveDecision import MoveDecision
-from model.decisions.ActionDecision import ActionDecision
+from model.item_type import ItemType
+from model import upgrade_type
+from model.decisions.move_decision import MoveDecision
+from model.decisions.action_decision import ActionDecision
 
 
 class Game:
 
-    def __init__(self, item: ItemType, upgrade: UpgradeType):
+    def __init__(self, item: ItemType, upgrade: upgrade_type):
         IO.send_heartbeat()
         self.send_item(item)
         self.send_upgrade(upgrade)
@@ -28,5 +28,5 @@ class Game:
     def send_item(self, item: ItemType) -> None:
         IO.send_string(item.engine_str())
 
-    def send_upgrade(self, upgrade: UpgradeType) -> None:
+    def send_upgrade(self, upgrade: upgrade_type) -> None:
         IO.send_string(upgrade.engine_str())

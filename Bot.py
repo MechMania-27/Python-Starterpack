@@ -1,21 +1,22 @@
 from IO import Logger
 from Game import Game
-from api import GameUtil
-from model.Position import Position
-from model.decisions.MoveDecision import MoveDecision
-from model.decisions.ActionDecision import ActionDecision
-from model.decisions.BuyDecision import BuyDecision
-from model.decisions.HarvestDecision import HarvestDecision
-from model.decisions.PlantDecision import PlantDecision
-from model.decisions.UseItemDecision import UseItemDecision
-from model.decisions.DoNothingDecision import DoNothingDecision
-from model.TileType import TileType
-from model.ItemType import ItemType
-from model.CropType import CropType
-from model.UpgradeType import UpgradeType
-from model.GameState import GameState
-from api.Constants import Constants
-import api.GameUtil
+from api import game_util
+from model.position import Position
+from model.decisions.move_decision import MoveDecision
+from model.decisions.action_decision import ActionDecision
+from model.decisions.buy_decision import BuyDecision
+from model.decisions.harvest_decision import HarvestDecision
+from model.decisions.plant_decision import PlantDecision
+from model.decisions.use_item_decision import UseItemDecision
+from model.decisions.do_nothing_decision import DoNothingDecision
+from model.tile_type import TileType
+from model.item_type import ItemType
+from model.crop_type import CropType
+from model.upgrade_type import UpgradeType
+from model.game_state import GameState
+from model.player import Player
+from api.constants import Constants
+import api.game_util
 
 import random
 
@@ -53,7 +54,7 @@ def get_move_decision(game: Game) -> MoveDecision:
         decision = MoveDecision(Position(constants.BOARD_WIDTH // 2, max(0, pos.y - constants.MAX_MOVEMENT)))
     # If not, then move randomly within the range of locations we can move to
     else:
-        pos = random.choice(GameUtil.within_move_range(game_state, my_player.name))
+        pos = random.choice(game_util.within_move_range(game_state, my_player.name))
         logger.debug("Moving randomly")
         decision = MoveDecision(pos)
 
@@ -87,7 +88,7 @@ def get_action_decision(game: Game) -> ActionDecision:
     # Get a list of possible harvest locations for our harvest radius
     possible_harvest_locations = []
     harvest_radius = my_player.harvest_radius
-    for harvest_pos in GameUtil.within_harvest_range(game_state, my_player.name):
+    for harvest_pos in game_util.within_harvest_range(game_state, my_player.name):
         if game_state.tile_map.get_tile(harvest_pos.x, harvest_pos.y).crop.value > 0:
             possible_harvest_locations.append(harvest_pos)
 

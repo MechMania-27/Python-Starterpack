@@ -1,5 +1,5 @@
-from model.decisions.ActionDecision import ActionDecision
-from model.decisions.MoveDecision import MoveDecision
+from model.decisions.action_decision import ActionDecision
+from model.decisions.move_decision import MoveDecision
 
 class BuyDecision(ActionDecision):
 

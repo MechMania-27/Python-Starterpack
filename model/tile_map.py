@@ -1,4 +1,4 @@
-from model.Tile import Tile
+from model.tile import Tile
 
 class TileMap:
     def __init__(self, tilemap_dict) -> None:

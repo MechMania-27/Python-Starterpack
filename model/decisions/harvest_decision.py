@@ -1,5 +1,5 @@
-from model.Position import Position
-from model.decisions.ActionDecision import ActionDecision
+from model.position import Position
+from model.decisions.action_decision import ActionDecision
 from typing import List
 
 

@@ -1,5 +1,5 @@
-from model.Player import Player
-from model.TileMap import TileMap
+from model.player import Player
+from model.tile_map import TileMap
 from typing import Dict
 
 
