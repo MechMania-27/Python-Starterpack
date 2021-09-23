@@ -29,8 +29,3 @@ class Player:
         self.has_delivery_drone = player_dict['hasDeliveryDrone']
         self.has_coffee_thermos = player_dict['hasCoffeeThermos']
         self.item_time_expired = player_dict['itemTimeExpired']
-
-        self.max_movement = constants.LONGER_LEGS_MAX_MOVEMENT if self.upgrade is UpgradeType.LONGER_LEGS \
-            else Player.constants.MAX_MOVEMENT
-        self.harvest_radius = constants.LONGER_SCYTHE_HARVEST_RADIUS if self.upgrade is UpgradeType.LONGER_SCYTHE \
-            else Player.constants.HARVEST_RADIUS

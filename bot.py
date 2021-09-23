@@ -1,4 +1,4 @@
-from io import Logger
+from networking.io import Logger
 from game import Game
 from api import game_util
 from model.position import Position
@@ -7,7 +7,6 @@ from model.decisions.action_decision import ActionDecision
 from model.decisions.buy_decision import BuyDecision
 from model.decisions.harvest_decision import HarvestDecision
 from model.decisions.plant_decision import PlantDecision
-from model.decisions.use_item_decision import UseItemDecision
 from model.decisions.do_nothing_decision import DoNothingDecision
 from model.tile_type import TileType
 from model.item_type import ItemType
@@ -16,7 +15,6 @@ from model.upgrade_type import UpgradeType
 from model.game_state import GameState
 from model.player import Player
 from api.constants import Constants
-import api.game_util
 
 import random
 

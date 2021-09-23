@@ -1,5 +1,5 @@
 from model.game_state import GameState
-import io
+from networking import io
 from model.item_type import ItemType
 from model import upgrade_type
 from model.decisions.move_decision import MoveDecision
