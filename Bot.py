@@ -1,5 +1,6 @@
 from IO import Logger
 from Game import Game
+from api import GameUtil
 from model.Position import Position
 from model.decisions.MoveDecision import MoveDecision
 from model.decisions.ActionDecision import ActionDecision
@@ -14,6 +15,7 @@ from model.CropType import CropType
 from model.UpgradeType import UpgradeType
 from model.GameState import GameState
 from api.Constants import Constants
+import api.GameUtil
 
 import random
 
@@ -47,13 +49,13 @@ def get_move_decision(game: Game) -> MoveDecision:
     if random.random() < 0.5 and \
             (sum(my_player.seed_inventory.values()) == 0 or
              len(my_player.harvested_inventory)):
+        logger.debug("Moving towards green grocer")
         decision = MoveDecision(Position(constants.BOARD_WIDTH // 2, max(0, pos.y - constants.MAX_MOVEMENT)))
     # If not, then move randomly within the range of locations we can move to
     else:
-        max_movement = constants.MAX_MOVEMENT // 2
-        x = min(max(0, random.randint(pos.x - max_movement, pos.x + max_movement)), constants.BOARD_WIDTH - 1)
-        y = min(max(0, random.randint(pos.y - max_movement, pos.y + max_movement)), constants.BOARD_HEIGHT - 1)
-        decision = MoveDecision(Position(x, y))
+        pos = random.choice(GameUtil.within_move_range(game_state, my_player.name))
+        logger.debug("Moving randomly")
+        decision = MoveDecision(pos)
 
     logger.debug(f"[Turn {game_state.turn}] Sending MoveDecision: {decision}")
     return decision
@@ -79,19 +81,17 @@ def get_action_decision(game: Game) -> ActionDecision:
     my_player: Player = game_state.get_my_player()
     pos: Position = my_player.position
     # Let the crop of focus be the one we have a seed for, if not just choose a random crop
-    crop = max(my_player.seed_inventory.items(), key=operator.itemgetter(1)) \
+    crop = max(my_player.seed_inventory, key=my_player.seed_inventory.get) \
         if sum(my_player.seed_inventory.values()) > 0 else random.choice(list(CropType))
 
     # Get a list of possible harvest locations for our harvest radius
     possible_harvest_locations = []
-    harvest_radius = constants.HARVEST_RADIUS if my_player.upgrade != UpgradeType.LONGER_SCYTHE \
-        else constants.LONGER_SCYTHE_HARVEST_RADIUS
+    harvest_radius = my_player.harvest_radius
+    for harvest_pos in GameUtil.within_harvest_range(game_state, my_player.name):
+        if game_state.tile_map.get_tile(harvest_pos.x, harvest_pos.y).crop.value > 0:
+            possible_harvest_locations.append(harvest_pos)
 
-    for x in range(max(0, pos.x - 1), min(pos.x + 1, constants.BOARD_WIDTH - 1)):
-        for y in range(max(0, pos.y - 1), min(pos.y + 1, constants.BOARD_HEIGHT - 1)):
-            if abs(x - pos.x) + abs(y - pos.y) <= harvest_radius and \
-                    game_state.tile_map.get_tile(x, y).crop.value > 0:
-                possible_harvest_locations.append(Position(x, y))
+    logger.debug(f"Possible harvest locations={possible_harvest_locations}")
 
     # If we can harvest something, try to harvest it
     if len(possible_harvest_locations) > 0:
@@ -99,15 +99,18 @@ def get_action_decision(game: Game) -> ActionDecision:
     # If not but we have that seed, then try to plant it in a fertility band
     elif my_player.seed_inventory[crop] > 0 and \
             game_state.tile_map.get_tile(pos.x, pos.y).type != TileType.GREEN_GROCER and \
-        game_state.tile_map.get_tile(pos.x, pos.y).type.value >= TileType.F_BAND_OUTER.value:
+            game_state.tile_map.get_tile(pos.x, pos.y).type.value >= TileType.F_BAND_OUTER.value:
+        logger.debug(f"Deciding to try to plant at position {pos}")
         decision = PlantDecision([crop], [pos])
     # If we don't have that seed, but we have the money to buy it, then move towards the
     # green grocer to buy it
     elif my_player.money >= crop.get_seed_price() and \
         game_state.tile_map.get_tile(pos.x, pos.y).type == TileType.GREEN_GROCER:
+        logger.debug(f"Buy 1 of {crop}")
         decision = BuyDecision([crop], [1])
     # If we can't do any of that, then just do nothing (move around some more)
     else:
+        logger.debug(f"Couldn't find anything to do, waiting for move step")
         decision = DoNothingDecision()
 
     logger.debug(f"[Turn {game_state.turn}] Sending ActionDecision: {decision}")
