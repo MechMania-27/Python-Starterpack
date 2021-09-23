@@ -6,7 +6,7 @@ class MoveDecision:
         self.pos = pos
 
     def __str__(self) -> str:
-        return f"MoveDecision({self.pos.x},{self.pos.y})"
+        return f"MoveDecision({self.pos})"
 
     def engine_str(self) -> str:
         return f"move {self.pos.engine_str()}"

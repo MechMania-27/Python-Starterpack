@@ -78,16 +78,16 @@ def get_action_decision(game: Game) -> ActionDecision:
     crop = random.choice(list(CropType))
     if my_player.seed_inventory[crop] > 0 and \
         game_state.tile_map.get_tile(pos.x, pos.y).type != TileType.GREEN_GROCER and \
-        game_state.tile_map.get_tile(pos.x, pos.y).type >= TileType.F_BAND_OUTER:
+        game_state.tile_map.get_tile(pos.x, pos.y).type.value >= TileType.F_BAND_OUTER.value:
         decision = PlantDecision([crop], [pos])
     elif my_player.money >= crop.get_seed_price() and \
-        game_state.tile_map.get_tile(pos.x, pos.y).type != TileType.GREEN_GROCER:
+        game_state.tile_map.get_tile(pos.x, pos.y).type == TileType.GREEN_GROCER:
         decision = BuyDecision([crop], [1])
     else:
         harvest_radius = 1
         locations = []
-        for x in range(max(0, pos.x - 1), min(pos.x + 1, constants.BOARD_HEIGHT - 1)):
-            for y in range(max(0, pos.y - 1), min(pos.y + 1, constants.BOARD_WIDTH - 1)):
+        for x in range(max(0, pos.x - 1), min(pos.x + 1, constants.BOARD_WIDTH - 1)):
+            for y in range(max(0, pos.y - 1), min(pos.y + 1, constants.BOARD_HEIGHT - 1)):
                 if abs(x - pos.x) + abs(y - pos.y) <= harvest_radius:
                     locations.append(Position(x, y))
         decision = HarvestDecision(locations)

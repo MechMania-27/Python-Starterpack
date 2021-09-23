@@ -12,7 +12,8 @@ class HarvestDecision(ActionDecision):
         for i in range(len(self.positions)):
             res += f"({self.positions[i].x},{self.positions[i].y})"
             res += ","
-        res = res[:-1]
+        if len(self.positions) > 0:
+            res = res[:-1]
         res += ")"
         return res
 
@@ -21,5 +22,6 @@ class HarvestDecision(ActionDecision):
         for i in range(len(self.positions)):
             res += self.positions[i].engine_str()
             res += " "
-        res = res[:-1]
+        if len(self.positions) > 0:
+            res = res[:-1]
         return res

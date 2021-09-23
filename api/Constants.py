@@ -11,8 +11,8 @@ class Constants:
         config_parser.read_string(file_content)
         config = config_parser['dummy_section']
         
-        self.BOARD_HEIGHT                           = int(config['board.width'])
-        self.BOARD_WIDTH                            = int(config['board.height'])
+        self.BOARD_WIDTH                            = int(config['board.width'])
+        self.BOARD_HEIGHT                           = int(config['board.height'])
         self.GRASS_ROWS                             = int(config['board.grass.rows'])
         self.GREENGROCER_LENGTH                     = int(config['board.greengrocer.length'])
         self.FBAND_INNER_HEIGHT                     = int(config['fertilityband.inner.height'])

@@ -15,7 +15,8 @@ class BuyDecision(ActionDecision):
             res += " "
             res += str(self.quantities[i])
             res += " "
-        res = res[:-1]
+        if len(self.crop_types) > 0:
+            res = res[:-1]
         return res
 
     def __str__(self) -> str:
@@ -25,6 +26,7 @@ class BuyDecision(ActionDecision):
             res += ":"
             res += str(self.quantities[i])
             res += ","
-        res = res[:-1]
+        if len(self.crop_types) > 0:
+            res = res[:-1]
         res += ")"
         return res
