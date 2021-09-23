@@ -1,5 +1,5 @@
-from IO import Logger
-from Game import Game
+from io import Logger
+from game import Game
 from api import game_util
 from model.position import Position
 from model.decisions.move_decision import MoveDecision
