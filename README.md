@@ -10,7 +10,11 @@ More information about the game mechanics are detailed here: [Wiki](https://gith
 
 Most of the classes that you'll need to build your own bot have already been imported, and a basic bot that moves around semi-randomly has also been implemented. Your job now is to try to build bots that can get you all the achievements and build a bot that can beat all of the other bots in the competition.
 
-You are allowed to look at any file in this repository. You'll primarily need to look at the classes within the **model** package and the **model.decisions** package for information about the decisions that you are allowed to send and what those inputs are. We have also provided you with some helper functions within the **api.game_util** package and game constants within the **api.constants** package. Many of these values have been set already through the **resources/mm27.properties** file, so if you don't see an explicit value, check there.
+You are allowed to look at any file in this repository.
+
+Make sure to set an `Item` and `Upgrade` to use from the enum class `ItemType` and `UpgradeType` within the `Game` constructor in the `main` method.
+
+You'll primarily need to look at the classes within the **model** package and the **model.decisions** package for information about the decisions that you are allowed to send and what those inputs are. We have also provided you with some helper functions within the **api.game_util** package and game constants within the **api.constants** package. Many of these values have been set already through the **resources/mm27.properties** file, so if you don't see an explicit value, check there.
 
 Note: Please do not print out debug statements using `print()`. Use the provided `logger` object (`logger.info("message")` and `logger.debug("message")`).
 
