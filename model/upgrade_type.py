@@ -1,7 +1,7 @@
 from enum import Enum
 
 class UpgradeType(Enum):
-    LONGER_SCYTHE = 0
+    SCYTHE = 0
     LOYALTY_CARD = 1
     LONGER_LEGS = 2
     RABBITS_FOOT = 3

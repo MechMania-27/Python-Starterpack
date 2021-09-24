@@ -120,7 +120,7 @@ def main():
     """
     Competitor TODO: choose an item and upgrade for your bot
     """
-    game = Game(ItemType.COFFEE_THERMOS, UpgradeType.LONGER_SCYTHE)
+    game = Game(ItemType.COFFEE_THERMOS, UpgradeType.SCYTHE)
 
     while (True):
         try:

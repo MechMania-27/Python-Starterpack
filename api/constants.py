@@ -45,6 +45,6 @@ class Constants:
         self.RABBITS_FOOT_DOUBLE_DROP_CHANCE        = float(config['upgrades.rabbits_foot_double_drop_chance'])
         self.LONGER_LEGS_MAX_MOVEMENT               = int(config['upgrades.longer_legs_max_movement'])
         self.SEED_A_PULT_PLANT_RADIUS               = int(config['upgrades.seed_a_pult_plant_radius'])
-        self.LONGER_SCYTHE_HARVEST_RADIUS           = int(config['upgrades.longer_scythe_harvest_radius'])
+        self.SCYTHE_HARVEST_RADIUS                  = int(config['upgrades.scythe_harvest_radius'])
         self.BACKPACK_CARRYING_CAPACITY             = int(config['upgrades.backpack_carrying_capacity'])
         self.SPYGLASS_PROTECTION_RADIUS             = int(config['upgrades.spyglass_protection_radius'])
