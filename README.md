@@ -17,7 +17,7 @@ If you have any questions, do not hesitate to contact us through Discord with an
 Good luck!
 
 ### Testing your bot
-See the Engine release here: https://github.com/MechMania-27/Engine/releases/tag/v1.0-mm27-release for instructions on how to compile and run the engine with your bot
+See the Engine JAR release here: https://github.com/MechMania-27/Wiki/releases/ for instructions on how to compile and run the engine with your bot
 
 ### Note about ML (Machine Learning)
 Due to the format of the infrastructure surrounding running the bot, it is difficult/impossible to store information between games. However, you are allowed to store information between turns of a game (since all variables available to you in bot.py are available to you throughout the entire game).
