@@ -12,6 +12,8 @@ Most of the classes that you'll need to build your own bot have already been imp
 
 You are allowed to look at any file in this repository. You'll primarily need to look at the classes within the **model** package and the **model.decisions** package for information about the decisions that you are allowed to send and what those inputs are. We have also provided you with some helper functions within the **api.game_util** package and game constants within the **api.constants** package. Many of these values have been set already through the **resources/mm27.properties** file, so if you don't see an explicit value, check there.
 
+Note: Please do not print out debug statements using `print()`. Use the provided `logger` object (`logger.info("message")` and `logger.debug("message")`).
+
 If you have any questions, do not hesitate to contact us through Discord with any questions!
 
 Good luck!
