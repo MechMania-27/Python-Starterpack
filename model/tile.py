@@ -15,5 +15,5 @@ class Tile:
         self.fertility_idol_effect = tile_dict['fertilityIdolEffect']
         self.scarecrow_effect = tile_dict['scarecrowEffect']
 
-    def has_scarecrow_effect(self, player: Player):
-        return self.scarecrow_effect >= 0 and self.scarecrow_effect != player.id
+    def has_scarecrow_effect(self, player_id: int):
+        return self.scarecrow_effect >= 0 and self.scarecrow_effect != player_id
