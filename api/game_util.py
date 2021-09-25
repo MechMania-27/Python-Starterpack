@@ -51,9 +51,9 @@ def within_move_range(game_state: GameState, name: str) -> List[Position]:
     speed = my_player.max_movement
     res = []
 
-    for i in range(my_player.position.y - speed, my_player.position.y + speed):
+    for i in range(my_player.position.y - speed, my_player.position.y + speed + 1):
         leftover_travel = max(0, speed - abs(my_player.position.y - i));
-        for j in range(my_player.position.x - leftover_travel, my_player.position.x + leftover_travel):
+        for j in range(my_player.position.x - leftover_travel, my_player.position.x + leftover_travel + 1):
             pos = Position(j, i)
             if valid_position(pos):
                 res.append(pos)
