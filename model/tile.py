@@ -16,4 +16,4 @@ class Tile:
         self.scarecrow_effect = tile_dict['scarecrowEffect']
 
     def has_scarecrow_effect(self, player_id: int):
-        return self.scarecrow_effect >= 0 and self.scarecrow_effect != player_id
+        return self.scarecrow_effect >= 0 and self.scarecrow_effect + 1 != player_id
