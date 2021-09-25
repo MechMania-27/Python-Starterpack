@@ -9,6 +9,7 @@ class Player:
     constants = Constants()
 
     def __init__(self, player_dict) -> None:
+        self.id = player_dict['id']
         self.name = player_dict['name']
         self.position = Position(0, 0).from_dict(player_dict['position'])
         self.upgrade = UpgradeType[player_dict['upgrade']]
